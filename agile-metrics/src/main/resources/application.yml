@@ -1,0 +1,8 @@
+spring:
+  data:
+  mongodb:
+    username: mongo-user
+    password: secret
+    database: agile-metrics
+    port: 27017
+    host: localhost
