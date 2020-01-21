@@ -5,6 +5,7 @@ import com.metrics.mappers.TeamMapper;
 import com.metrics.repositories.TeamRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import static java.util.Objects.requireNonNull;
@@ -23,11 +24,18 @@ public class TeamController {
 
     @PostMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<TeamDto> postTaco(@RequestBody Mono<TeamDto> teamDtoMono) {
-
-        return teamRepository
+    public Mono<TeamDto> addTeam(@RequestBody Mono<TeamDto> teamDtoMono) {
+        return this.teamRepository
                 .saveAll(teamDtoMono.map(this.teamMapper::toTeam))
                 .next()
+                .map(this.teamMapper::toTeamDto);
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public Flux<TeamDto> getAllTeams() {
+        return this.teamRepository
+                .findAll()
                 .map(this.teamMapper::toTeamDto);
     }
 
