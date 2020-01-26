@@ -1,6 +1,7 @@
 spring:
   data:
   mongodb:
+    authentication-database: admin
     username: mongo-user
     password: secret
     database: agile-metrics

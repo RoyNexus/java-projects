@@ -10,5 +10,5 @@ public class CycleTimeDto {
     private String id;
     private LocalDate startDate;
     private LocalDate endDate;
-    private String teamId;
+
 }
