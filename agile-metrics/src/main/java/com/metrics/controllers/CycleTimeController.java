@@ -1,7 +1,6 @@
 package com.metrics.controllers;
 
 import com.metrics.controllers.dto.CycleTimeDto;
-import com.metrics.domain.CycleTime;
 import com.metrics.mappers.CycleTimeMapper;
 import com.metrics.repositories.CycleTimeRepository;
 import org.springframework.http.HttpStatus;
@@ -28,7 +27,7 @@ public class CycleTimeController {
 
         return this.cycleTimeRepository
                 .saveAll(cycleTimeDtoMono.map((cycleTimeDto) -> {
-                    CycleTime cycleTime = this.cycleTimeMapper.toCycleTime(cycleTimeDto);
+                    var cycleTime = this.cycleTimeMapper.toCycleTime(cycleTimeDto);
                     cycleTime.setTeamId(teamId);
                     return cycleTime;
                 }))
